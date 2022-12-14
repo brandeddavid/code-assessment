@@ -1,24 +1,16 @@
-type ListItem = {
-  name: string;
-  age?: number | null;
-};
+import type { ListItem } from './types';
+import { addToListValidation } from './helpers/validation';
+
 const list: ListItem[] = [];
 
 const getMessage = (): string => 'Hello world!';
 
 const addToList = (item: ListItem): string | ListItem[] => {
-  const { name, age } = item;
+  const { name, age = null } = item;
+  const validationError = addToListValidation(name, age);
 
-  if (!name) {
-    return 'Name is required';
-  }
-
-  if (age && age < 18) {
-    return 'Need to be over 18';
-  }
-
-  if (age && age > 100) {
-    return 'Invalid age given';
+  if (validationError) {
+    return validationError;
   }
 
   list.push(item);

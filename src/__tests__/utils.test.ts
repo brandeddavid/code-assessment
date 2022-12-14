@@ -1,5 +1,4 @@
 import * as utils from '../utils';
-import { addToList } from '../utils';
 
 describe('utils', () => {
   describe('utils#getMessage()', () => {
